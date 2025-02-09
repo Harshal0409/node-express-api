@@ -1,0 +1,91 @@
+# Final Report: RESTful API with Node.js, Express, and MySQL
+
+## **1. Project Overview**
+
+This project involves building a RESTful API using **Node.js** and **Express**, with **MySQL** as the database. The API supports CRUD operations for managing items, implements **asynchronous file handling**, **rate limiting**, and **JWT-based authentication** for secure access.
+
+## **2. Approach and Implementation**
+
+### **2.1 CRUD Operations with MySQL**
+
+- A MySQL database is used to store items.
+- A table named `items` is created with columns: `id`, `name`, `description`, and `created_at`.
+- API endpoints are implemented for Create, Read, Update, and Delete operations.
+- The database is connected using the `mysql2` package.
+- Queries are executed with prepared statements to prevent SQL injection.
+
+### **2.2 Asynchronous File Handling**
+
+- The `fs.promises` module is used for handling logs.
+- Each time an item is created, a log entry is added to `logs.json`.
+- File operations are handled asynchronously to avoid blocking requests.
+
+### **2.3 Rate Limiting**
+
+- Implemented using the `express-rate-limit` package.
+- Each user is restricted to **100 requests per 15 minutes**.
+- If the limit is exceeded, the API returns a `429 Too Many Requests` error.
+
+### **2.4 JWT Authentication**
+
+- Users must register and log in to obtain a JWT token.
+- API requests require a **Bearer Token** in the `Authorization` header.
+- The `jsonwebtoken` package is used for token generation and verification.
+
+### **2.5 Error Handling**
+
+- Implemented centralized error handling for:
+  - Invalid input
+  - Authentication failures
+  - Database connection issues
+  - API rate limits
+
+## **3. Challenges and Solutions**
+
+### **3.1 Handling Asynchronous File Writes**
+
+**Challenge:** Writing to `logs.json` asynchronously without causing conflicts.
+**Solution:** Used `fs.promises.appendFile()` to handle concurrent writes efficiently.
+
+### **3.2 Securing Authentication**
+
+**Challenge:** Preventing unauthorized access to protected routes.
+**Solution:** Used **bcrypt** to hash passwords and **JWT** for secure authentication.
+
+### **3.3 Rate Limiting Accuracy**
+
+**Challenge:** Preventing excessive API usage without affecting performance.
+**Solution:** Used **express-rate-limit** with IP-based tracking for efficient rate limiting.
+
+## **4. Conclusion**
+
+This project successfully implemented a secure, scalable RESTful API with:
+
+- Database-backed CRUD operations
+- Asynchronous logging
+- Rate limiting
+- JWT authentication
+- Robust error handling
+
+The API follows industry best practices and can be extended further with additional features such as role-based access control and API versioning.
+
+## **5. Future Enhancements**
+
+- Implement user roles for fine-grained access control.
+- Add pagination for efficient data retrieval.
+- Introduce caching mechanisms to optimize database queries.
+
+## **6. References**
+
+- Node.js Official Documentation
+- Express.js Guide
+- MySQL Documentation
+- JWT Authentication Best Practices
+
+---
+
+**Author:** Harshal
+**Date:** 9 February 2025
+
+
+
